@@ -2,7 +2,7 @@ package com.kelvin.petstore.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kelvin.petstore.config.WebUnitTestConfiguration;
-import com.kelvin.petstore.model.AppUserCreateForm;
+import com.kelvin.petstore.model.user.AppUserCreateForm;
 import com.kelvin.petstore.util.UserTestUtil;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

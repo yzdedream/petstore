@@ -1,9 +1,9 @@
 package com.kelvin.petstore.controller;
 
 import com.kelvin.petstore.model.ApiResponse;
-import com.kelvin.petstore.model.AppUser;
-import com.kelvin.petstore.model.AppUserCreateForm;
-import com.kelvin.petstore.model.AppUserUpdateForm;
+import com.kelvin.petstore.model.user.AppUser;
+import com.kelvin.petstore.model.user.AppUserCreateForm;
+import com.kelvin.petstore.model.user.AppUserUpdateForm;
 import com.kelvin.petstore.service.UserService;
 import com.kelvin.petstore.util.ApiResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;

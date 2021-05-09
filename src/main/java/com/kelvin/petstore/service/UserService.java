@@ -1,9 +1,9 @@
 package com.kelvin.petstore.service;
 
 import com.kelvin.petstore.dao.UserDao;
-import com.kelvin.petstore.model.AppUser;
-import com.kelvin.petstore.model.AppUserCreateForm;
-import com.kelvin.petstore.model.AppUserUpdateForm;
+import com.kelvin.petstore.model.user.AppUser;
+import com.kelvin.petstore.model.user.AppUserCreateForm;
+import com.kelvin.petstore.model.user.AppUserUpdateForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

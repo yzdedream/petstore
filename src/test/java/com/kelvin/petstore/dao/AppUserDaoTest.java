@@ -1,8 +1,8 @@
 package com.kelvin.petstore.dao;
 
-import com.kelvin.petstore.model.AppUser;
-import com.kelvin.petstore.model.AppUserCreateForm;
-import com.kelvin.petstore.model.AppUserUpdateForm;
+import com.kelvin.petstore.model.user.AppUser;
+import com.kelvin.petstore.model.user.AppUserCreateForm;
+import com.kelvin.petstore.model.user.AppUserUpdateForm;
 import org.flywaydb.core.Flyway;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
