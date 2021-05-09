@@ -2,10 +2,11 @@ package com.kelvin.petstore.dao;
 
 import com.kelvin.petstore.model.AppUser;
 import com.kelvin.petstore.model.AppUserCreateForm;
-import com.sun.istack.internal.NotNull;
+import com.kelvin.petstore.model.AppUserUpdateForm;
 import org.dalesbred.Database;
 import org.dalesbred.annotation.SQL;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Repository;
 
@@ -34,11 +35,21 @@ public class UserDao {
         return this.db.findUniqueOrNull(AppUser.class, sql, name);
     }
 
-    public long createAppUser(@NotNull AppUserCreateForm user) {
+    public long createAppUser(@NonNull AppUserCreateForm user) {
         @SQL String sql = "INSERT INTO app_user (first_name, last_name, username, email, phone)\n" +
                 "VALUES (?, ?, ?, ?, ?)\n" +
                 "RETURNING id";
         return db.findUniqueInt(sql,
                 user.firstName, user.lastName, user.username, user.email, user.phone);
+    }
+
+    public void updateAppUser(String username, AppUserUpdateForm form) {
+        @SQL String sql = "UPDATE app_user\n" +
+                "SET first_name= ?,\n" +
+                "    last_name=?,\n" +
+                "    email=?,\n" +
+                "    phone=?\n" +
+                "WHERE username = ?;";
+        db.update(sql, form.firstName, form.lastName, form.email, form.phone, username);
     }
 }

@@ -2,6 +2,7 @@ package com.kelvin.petstore.dao;
 
 import com.kelvin.petstore.model.AppUser;
 import com.kelvin.petstore.model.AppUserCreateForm;
+import com.kelvin.petstore.model.AppUserUpdateForm;
 import org.flywaydb.core.Flyway;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -9,6 +10,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
+
+import static org.junit.Assert.assertEquals;
 
 @SpringBootTest
 public class AppUserDaoTest {
@@ -87,5 +90,29 @@ public class AppUserDaoTest {
 
         AppUser user3 = this.userDao.findUserByName(null);
         assert user3 == null;
+    }
+
+    @Test
+    @Transactional
+    public void testUpdateUser() {
+        AppUserCreateForm form = this.getDummyCreateForm();
+        long id = this.userDao.createAppUser(form);
+        AppUser created = this.userDao.findUserByName(form.username);
+
+        AppUserUpdateForm updateForm = new AppUserUpdateForm();
+        updateForm.firstName = "kelvin2";
+        updateForm.lastName = "K2";
+        updateForm.email = "kelvin2@K2.com";
+        updateForm.phone = "23333";
+
+        assert created != null;
+        this.userDao.updateAppUser(created.username, updateForm);
+        AppUser updated = this.userDao.findUserById(id);
+
+        assert updated != null;
+        Assertions.assertEquals("kelvin2", updated.firstName);
+        Assertions.assertEquals("K2", updated.lastName);
+        Assertions.assertEquals("kelvin2@K2.com", updated.email);
+        Assertions.assertEquals("23333", updated.phone);
     }
 }

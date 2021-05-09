@@ -3,6 +3,7 @@ package com.kelvin.petstore.controller;
 import com.kelvin.petstore.model.ApiResponse;
 import com.kelvin.petstore.model.AppUser;
 import com.kelvin.petstore.model.AppUserCreateForm;
+import com.kelvin.petstore.model.AppUserUpdateForm;
 import com.kelvin.petstore.service.UserService;
 import com.kelvin.petstore.util.ApiResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,4 +30,10 @@ public class UserController {
         this.userService.createUser(user);
         return ApiResponseUtil.buildDefaultResponse();
     }
+
+    @PutMapping("/{username}")
+    public void updateUser(@RequestBody AppUserUpdateForm form, @PathVariable String username) {
+        this.userService.updateUser(username, form);
+    }
+
 }
