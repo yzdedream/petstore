@@ -8,7 +8,7 @@ CREATE TABLE app_user
     last_name   VARCHAR(255),
     email       VARCHAR(255),
     phone       VARCHAR(255),
-    user_status user_status                 DEFAULT 'active',
-    created     TIMESTAMP          NOT NULL DEFAULT current_timestamp
+    user_status user_status        NOT NULL DEFAULT 'active',
+    created     timestamp          NOT NULL DEFAULT current_timestamp
 );
 

@@ -52,4 +52,10 @@ public class UserDao {
                 "WHERE username = ?;";
         db.update(sql, form.firstName, form.lastName, form.email, form.phone, username);
     }
+
+    public void deleteUser(String username) {
+        @SQL String sql = "DELETE FROM app_user\n" +
+                "WHERE username = ?";
+        db.update(sql,username);
+    }
 }

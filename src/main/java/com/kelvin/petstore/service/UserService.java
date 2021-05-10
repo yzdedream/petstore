@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 public class UserService {
     private final UserDao userDao;
@@ -15,6 +17,11 @@ public class UserService {
     @Autowired
     public UserService(UserDao userDao) {
         this.userDao = userDao;
+    }
+
+    @Transactional
+    public void createWithList(List<AppUserCreateForm> forms) {
+        forms.forEach(this.userDao::createAppUser);
     }
 
     @Transactional
@@ -34,6 +41,16 @@ public class UserService {
 
     @Transactional
     public void updateUser(String username, AppUserUpdateForm form) {
-        this.userDao.updateAppUser(username,form);
+        this.userDao.updateAppUser(username, form);
+    }
+
+    @Transactional(readOnly = true)
+    public boolean isUserExist(String name) {
+        return this.userDao.findUserByName(name) != null;
+    }
+
+    @Transactional
+    public void deleteUser(String name) {
+        this.userDao.deleteUser(name);
     }
 }
