@@ -2,6 +2,7 @@ package com.kelvin.petstore.dao;
 
 import com.kelvin.petstore.model.pet.Category;
 import com.kelvin.petstore.model.pet.Pet;
+import com.kelvin.petstore.util.PetTestUtil;
 import org.flywaydb.core.Flyway;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -19,6 +20,9 @@ public class PetDaoTest {
 
     @Autowired
     private PetDao petDao;
+
+    @Autowired
+    private PetTestUtil petTestUtil;
 
     @BeforeEach
     public void cleanDB() {
@@ -41,7 +45,7 @@ public class PetDaoTest {
     @Test
     @Transactional
     public void testCreateAndGetPet() {
-        long petId = this.initTestPet();
+        long petId = this.petTestUtil.initTestPet();
         Pet pet = this.petDao.getPetById(petId);
 
         Assertions.assertEquals("doge", pet.name);
@@ -49,18 +53,10 @@ public class PetDaoTest {
         Assertions.assertEquals("available", pet.status);
     }
 
-    private long initTestPet() {
-        String name = "doge";
-        long categoryId = this.petDao.createCategory("dog");
-        String status = "available";
-
-        return this.petDao.createPet(name, categoryId, status);
-    }
-
     @Test
     @Transactional
     public void testAddTagsToPet() {
-        long petId = this.initTestPet();
+        long petId = this.petTestUtil.initTestPet();
         String tag1 = "grey";
         String tag2 = "cute";
         long tagID1 = this.petDao.createTag(tag1);
@@ -77,7 +73,7 @@ public class PetDaoTest {
     @Test
     @Transactional
     public void testUpdatePet() {
-        long petId = this.initTestPet();
+        long petId = this.petTestUtil.initTestPet();
         Pet pet = this.petDao.getPetById(petId);
         String newCategoryName = "coin";
         long categoryId = this.petDao.createCategory(newCategoryName);
