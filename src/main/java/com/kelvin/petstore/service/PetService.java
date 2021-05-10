@@ -65,4 +65,9 @@ public class PetService {
     public void deletePet(long petId) {
         this.petDao.deletePet(petId);
     }
+
+    @Transactional(readOnly = true)
+    public List<Pet> getPetsByStatus(String status) {
+        return this.petDao.getPetsByStatus(status);
+    }
 }

@@ -98,6 +98,21 @@ public class PetDao {
         return result;
     }
 
+    public List<Pet> getPetsByStatus(String status) {
+        @SQL String sql = this.petSQL + "WHERE pet.status = ?\n GROUP BY pet.id, c.id;";
+        List<Pet> results = db.findAll(Pet.class, sql, status);
+        this.removeEmptyTags(results);
+        return results;
+    }
+
+    private void removeEmptyTags(List<Pet> pets) {
+        pets.forEach(pet -> {
+            if (pet.tags.size() > 0 && pet.tags.get(0).isEmpty()) {
+                pet.tags.clear();
+            }
+        });
+    }
+
     public List<Tag> getTags() {
         @SQL String sql = "SELECT id, name\n" +
                 "FROM tag;";
@@ -118,6 +133,13 @@ public class PetDao {
                 "status=?\n" +
                 "WHERE pet.id = ?;\n";
         db.update(sql, name, categoryId, status, petId);
+    }
+
+    public void updatePetStatus(long petId, String status) {
+        @SQL String sql = "UPDATE pet\n" +
+                "SET status = ?\n" +
+                "WHERE id = ?";
+        db.update(sql, status, petId);
     }
 
     public void clearTagsOfPet(long petId) {
