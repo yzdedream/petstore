@@ -33,14 +33,7 @@ public class UserControllerTest {
     @Transactional
     public void testCreateAndGetUser() throws Exception {
         this.userTestUtil.clearUser("kelvin");
-
-        AppUserCreateForm user = new AppUserCreateForm();
-        user.username = "kelvin";
-        user.firstName = "kelvin";
-        user.lastName = "K";
-        user.email = "kelvin@K.com";
-        user.phone = "12233";
-
+        AppUserCreateForm user = this.userTestUtil.getTestUserCreateForm();
         String json = objectMapper.writeValueAsString(user);
 
         mvc.perform(post("/user")
