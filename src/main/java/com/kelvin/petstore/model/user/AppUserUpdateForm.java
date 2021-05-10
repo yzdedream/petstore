@@ -1,4 +1,4 @@
-package com.kelvin.petstore.model;
+package com.kelvin.petstore.model.user;
 
 public class AppUserUpdateForm {
     public String firstName;
